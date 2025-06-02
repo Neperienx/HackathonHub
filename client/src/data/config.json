@@ -1,0 +1,24 @@
+{
+  "landing": {
+    "title": "InnovateHack 2025",
+    "description": "A hackathon to explore repurposing Bosch XC technologies for innovative new applications",
+    "timeline": [
+      { "label": "Launch", "date": "2025-06-10" },
+      { "label": "Kickoff", "date": "2025-06-15" },
+      { "label": "Mid-Check-in", "date": "2025-06-25" },
+      { "label": "Submission", "date": "2025-07-01" },
+      { "label": "Awards", "date": "2025-07-05" }
+    ]
+  },
+  "rules": {
+    "teamSize": "2-5 members",
+    "deliverables": ["Pitch deck", "MVP demo", "Market fit analysis"],
+    "evaluationCriteria": ["Innovation", "Feasibility", "Impact"]
+  },
+  "resources": {
+    "technologies": [
+      { "name": "Radar Sensor A", "description": "Short-range radar for automation and detection applications" },
+      { "name": "Ultrasonic Module B", "description": "Used in parking sensors, adaptable for robotics and proximity detection" }
+    ]
+  }
+}
