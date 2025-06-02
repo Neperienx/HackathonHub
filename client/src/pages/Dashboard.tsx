@@ -7,10 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { Team } from "@/types";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "wouter";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [teams, setTeams] = useLocalStorage<Team[]>("hackathon_teams", []);
 
@@ -25,7 +25,7 @@ const Dashboard = () => {
         };
         return {
           ...team,
-          status: newStatus,
+          status: newStatus as 'ideation' | 'prototyping' | 'testing' | 'submitted',
           progress: progressMap[newStatus] || 25
         };
       }
@@ -77,7 +77,7 @@ const Dashboard = () => {
           <Users className="mx-auto h-16 w-16 text-gray-400 mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">No teams registered yet</h3>
           <p className="text-gray-600 mb-6">Be the first to register your team for the hackathon!</p>
-          <Button onClick={() => navigate('/signup')}>
+          <Button onClick={() => setLocation('/signup')}>
             <UserPlus className="mr-2 h-5 w-5" />
             Register Team
           </Button>

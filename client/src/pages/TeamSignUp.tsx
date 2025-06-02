@@ -80,7 +80,7 @@ const TeamSignUp = () => {
     });
 
     setTimeout(() => {
-      navigate('/dashboard');
+      setLocation('/dashboard');
     }, 2000);
   };
 
@@ -314,7 +314,7 @@ const TeamSignUp = () => {
 
               {/* Submit Button */}
               <div className="flex justify-end space-x-4">
-                <Button type="button" variant="outline" onClick={() => navigate('/')}>
+                <Button type="button" variant="outline" onClick={() => setLocation('/')}>
                   Cancel
                 </Button>
                 <Button type="submit">

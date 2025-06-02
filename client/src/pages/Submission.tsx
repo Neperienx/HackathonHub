@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { Team, Submission } from "@/types";
+import { Team, Submission as SubmissionType } from "@/types";
 
 const submissionSchema = z.object({
   teamId: z.string().min(1, "Please select a team"),
@@ -35,7 +35,7 @@ type SubmissionFormData = z.infer<typeof submissionSchema>;
 const Submission = () => {
   const { toast } = useToast();
   const [teams] = useLocalStorage<Team[]>("hackathon_teams", []);
-  const [submissions, setSubmissions] = useLocalStorage<Submission[]>("hackathon_submissions", []);
+  const [submissions, setSubmissions] = useLocalStorage<SubmissionType[]>("hackathon_submissions", []);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const form = useForm<SubmissionFormData>({
@@ -60,7 +60,7 @@ const Submission = () => {
   const selectedTeam = teams.find(team => team.id === selectedTeamId);
 
   const onSubmit = (data: SubmissionFormData) => {
-    const newSubmission: Submission = {
+    const newSubmission: SubmissionType = {
       id: Date.now().toString(),
       teamId: data.teamId,
       projectTitle: data.projectTitle,

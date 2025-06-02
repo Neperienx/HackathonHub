@@ -11,7 +11,7 @@ import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { Team, Submission, Evaluation } from "@/types";
+import { Team, Submission, Evaluation as EvaluationType } from "@/types";
 
 const evaluationSchema = z.object({
   innovation: z.number().min(1).max(10),
