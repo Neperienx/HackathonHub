@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "wouter";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -33,7 +33,7 @@ const teamSchema = z.object({
 type TeamFormData = z.infer<typeof teamSchema>;
 
 const TeamSignUp = () => {
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [teams, setTeams] = useLocalStorage<Team[]>("hackathon_teams", []);
   const [isSubmitted, setIsSubmitted] = useState(false);

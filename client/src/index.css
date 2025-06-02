@@ -58,23 +58,22 @@
   }
 }
 
-/* Custom styles for the hackathon app */
-.timeline-line {
-  @apply absolute left-4 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-primary-200;
-}
-
-.team-card-hover {
-  @apply hover:shadow-lg transition-all duration-200;
-}
-
-.evaluation-slider {
-  @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer;
-}
-
-.evaluation-slider::-webkit-slider-thumb {
-  @apply appearance-none w-4 h-4 bg-primary-600 rounded-full cursor-pointer;
-}
-
-.evaluation-slider::-moz-range-thumb {
-  @apply w-4 h-4 bg-primary-600 rounded-full cursor-pointer border-none;
+/* Custom color extensions */
+@layer utilities {
+  .bg-primary-50 { background-color: rgb(239 246 255); }
+  .bg-primary-100 { background-color: rgb(219 234 254); }
+  .bg-primary-200 { background-color: rgb(191 219 254); }
+  .bg-primary-600 { background-color: rgb(37 99 235); }
+  .bg-primary-700 { background-color: rgb(29 78 216); }
+  .text-primary-600 { color: rgb(37 99 235); }
+  .text-primary-100 { color: rgb(219 234 254); }
+  .bg-secondary-50 { background-color: rgb(248 250 252); }
+  .bg-secondary-100 { background-color: rgb(241 245 249); }
+  .bg-secondary-500 { background-color: rgb(100 116 139); }
+  .bg-secondary-600 { background-color: rgb(71 85 105); }
+  .text-secondary-600 { color: rgb(71 85 105); }
+  .border-primary-100 { border-color: rgb(219 234 254); }
+  .border-secondary-100 { border-color: rgb(241 245 249); }
+  .border-green-200 { border-color: rgb(187 247 208); }
+  .border-orange-200 { border-color: rgb(254 215 170); }
 }

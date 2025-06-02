@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route } from "wouter";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import Layout from "@/components/Layout";
@@ -9,24 +9,22 @@ import TeamSignUp from "@/pages/TeamSignUp";
 import Dashboard from "@/pages/Dashboard";
 import Submission from "@/pages/Submission";
 import Evaluation from "@/pages/Evaluation";
+import NotFound from "@/pages/not-found";
 
 function App() {
   return (
     <TooltipProvider>
-      <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/rules" element={<Rules />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/signup" element={<TeamSignUp />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/submission" element={<Submission />} />
-            <Route path="/evaluation" element={<Evaluation />} />
-          </Routes>
-        </Layout>
+      <Layout>
+        <Route path="/" component={Landing} />
+        <Route path="/rules" component={Rules} />
+        <Route path="/resources" component={Resources} />
+        <Route path="/signup" component={TeamSignUp} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/submission" component={Submission} />
+        <Route path="/evaluation" component={Evaluation} />
+        <Route component={NotFound} />
         <Toaster />
-      </Router>
+      </Layout>
     </TooltipProvider>
   );
 }

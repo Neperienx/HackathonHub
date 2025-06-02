@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "wouter";
 import { Rocket, Flag, Target, Upload, Trophy, Clock, Users, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import config from "@/data/config.json";
 
 const Landing = () => {
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
 
   const timelineIcons = [Rocket, Flag, Target, Upload, Trophy];
   const timelineColors = [
@@ -31,7 +31,7 @@ const Landing = () => {
             <Button
               size="lg"
               className="bg-white text-primary-600 hover:bg-gray-50 shadow-lg"
-              onClick={() => navigate('/signup')}
+              onClick={() => setLocation('/signup')}
             >
               <Users className="mr-2 h-5 w-5" />
               Register Your Team

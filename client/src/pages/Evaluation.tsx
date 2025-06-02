@@ -114,7 +114,7 @@ const Evaluation = () => {
     );
   }
 
-  const isEvaluated = evaluations.some(eval => eval.submissionId === currentSubmission.id);
+  const isEvaluated = evaluations.some(evaluation => evaluation.submissionId === currentSubmission.id);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "wouter";
 import { Menu, X, Code } from "lucide-react";
 import config from "@/data/config.json";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  const [location] = useLocation();
 
   const navigationItems = [
     { label: "Home", path: "/" },
@@ -18,7 +18,7 @@ const Navigation = () => {
   ];
 
   const isActive = (path: string) => {
-    return location.pathname === path;
+    return location === path;
   };
 
   return (
