@@ -4,25 +4,25 @@
 
 :root {
   --background: 0 0% 100%;
-  --foreground: 20 14.3% 4.1%;
-  --muted: 60 4.8% 95.9%;
-  --muted-foreground: 25 5.3% 44.7%;
+  --foreground: 222 84% 4.9%;
+  --muted: 210 40% 98%;
+  --muted-foreground: 215.4 16.3% 46.9%;
   --popover: 0 0% 100%;
-  --popover-foreground: 20 14.3% 4.1%;
+  --popover-foreground: 222 84% 4.9%;
   --card: 0 0% 100%;
-  --card-foreground: 20 14.3% 4.1%;
-  --border: 20 5.9% 90%;
-  --input: 20 5.9% 90%;
-  --primary: 24 100% 60%; /* #2563eb equivalent in HSL */
-  --primary-foreground: 211 100% 99%;
-  --secondary: 60 4.8% 95.9%;
-  --secondary-foreground: 24 9.8% 10%;
-  --accent: 60 4.8% 95.9%;
-  --accent-foreground: 24 9.8% 10%;
+  --card-foreground: 222 84% 4.9%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --primary: 262 83% 58%; /* Modern purple gradient start */
+  --primary-foreground: 210 40% 98%;
+  --secondary: 220 14.3% 95.9%;
+  --secondary-foreground: 220.9 39.3% 11%;
+  --accent: 220 14.3% 95.9%;
+  --accent-foreground: 220.9 39.3% 11%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 60 9.1% 97.8%;
-  --ring: 20 14.3% 4.1%;
-  --radius: 0.5rem;
+  --ring: 262 83% 58%;
+  --radius: 0.75rem;
 }
 
 .dark {
@@ -58,22 +58,82 @@
   }
 }
 
-/* Custom color extensions */
+/* Modern gradient and color system */
 @layer utilities {
-  .bg-primary-50 { background-color: rgb(239 246 255); }
-  .bg-primary-100 { background-color: rgb(219 234 254); }
-  .bg-primary-200 { background-color: rgb(191 219 254); }
-  .bg-primary-600 { background-color: rgb(37 99 235); }
-  .bg-primary-700 { background-color: rgb(29 78 216); }
-  .text-primary-600 { color: rgb(37 99 235); }
-  .text-primary-100 { color: rgb(219 234 254); }
-  .bg-secondary-50 { background-color: rgb(248 250 252); }
-  .bg-secondary-100 { background-color: rgb(241 245 249); }
-  .bg-secondary-500 { background-color: rgb(100 116 139); }
-  .bg-secondary-600 { background-color: rgb(71 85 105); }
-  .text-secondary-600 { color: rgb(71 85 105); }
-  .border-primary-100 { border-color: rgb(219 234 254); }
-  .border-secondary-100 { border-color: rgb(241 245 249); }
-  .border-green-200 { border-color: rgb(187 247 208); }
-  .border-orange-200 { border-color: rgb(254 215 170); }
+  .bg-gradient-innovation {
+    background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #06B6D4 100%);
+  }
+  
+  .bg-gradient-card {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+  }
+  
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #1E40AF 100%);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .innovation-glow {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+  }
+  
+  .floating-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .pulse-innovation {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
+  100% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.8); }
+}
+
+/* Enhanced component styles */
+@layer components {
+  .nav-modern {
+    @apply bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200/50;
+  }
+  
+  .card-modern {
+    @apply bg-white rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300;
+  }
+  
+  .btn-innovation {
+    @apply bg-gradient-innovation text-white font-semibold py-3 px-8 rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl;
+  }
+  
+  .timeline-modern {
+    position: relative;
+  }
+  
+  .timeline-modern::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #8B5CF6, #3B82F6, #06B6D4);
+    transform: translateX(-50%);
+  }
 }
