@@ -1,0 +1,95 @@
+Build a multi-page hackathon website as a static web app using React with TailwindCSS and React Router, styled with clean, modern UI components.
+
+The site is for an internal company hackathon and should include the following pages and features:
+
+🏠 1. Landing Page
+
+Displays the hackathon name, theme, and description.
+
+Includes a visual timeline with major phases (e.g., launch, kickoff, mid-check-in, submission, awards).
+
+A prominent call-to-action (CTA) button that links to the team sign-up.
+
+📜 2. Rules & Guidelines Page
+
+Lists required deliverables (e.g., pitch, MVP, tech stack, roadmap).
+
+Specifies team requirements (e.g., size, eligibility).
+
+Shows evaluation criteria used by judges (e.g., feasibility, innovation, business impact).
+
+📚 3. Resources Page
+
+Provides a technology catalog with descriptions of available internal technologies, tools, or platforms that teams can build upon.
+
+Optionally includes downloadable pitch decks, documentation links, or relevant reference materials.
+
+👥 4. Team Sign-Up Page
+
+A form to register a team: includes fields for team name, members (name/email), project name, and short description.
+
+On submission, store form state locally (in memory or localStorage; no backend needed).
+
+📊 5. Team Dashboard
+
+A simple dashboard showing the registered teams and their project info.
+
+Teams can update their progress status (e.g., ideation, prototyping, testing, submitted).
+
+Provide edit/delete buttons for updates (no login required).
+
+🏁 6. Submission Page
+
+A page where teams submit their final project deliverables (just simulate with form fields and local state).
+
+Fields: link to pitch deck/demo, short video (YouTube/Vimeo), summary of impact and learnings.
+
+🧪 7. Evaluation Page (Optional)
+
+Simulate how judges might see projects and score them using criteria from the config (e.g., sliders or star ratings).
+
+💾 All page content (headings, texts, timelines, field labels, etc.) must be fully configurable via a single config.json file.
+
+Use a structured JSON like this:
+
+json
+Copy
+Edit
+{
+  "landing": {
+    "title": "InnovateHack 2025",
+    "description": "A hackathon to explore repurposing Bosch XC technologies.",
+    "timeline": [
+      { "label": "Launch", "date": "2025-06-10" },
+      { "label": "Kickoff", "date": "2025-06-15" },
+      { "label": "Submission", "date": "2025-07-01" },
+      { "label": "Awards", "date": "2025-07-05" }
+    ]
+  },
+  "rules": {
+    "teamSize": "2-5 members",
+    "deliverables": ["Pitch deck", "MVP demo", "Market fit analysis"],
+    "evaluationCriteria": ["Feasibility", "Innovation", "Impact"]
+  },
+  "resources": {
+    "technologies": [
+      { "name": "Radar Sensor A", "description": "Short-range radar for automation." },
+      { "name": "Ultrasonic Module B", "description": "Used in parking sensors, adaptable for robotics." }
+    ]
+  }
+}
+🧩 Technical Requirements:
+
+Use React + TailwindCSS.
+
+Use React Router for navigation.
+
+Load content dynamically from the config.json file.
+
+Maintain team state with useState or localStorage.
+
+No backend: simulate data with in-memory state only.
+
+Optional: include basic responsiveness (mobile-friendly).
+
+🎯 Goal: This app should allow me to fully customize all the visible content by editing just one config.json file. It should be easy to deploy as a static site (e.g., Firebase, GitHub Pages, Vercel).
