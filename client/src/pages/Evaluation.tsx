@@ -29,7 +29,7 @@ const Evaluation = () => {
   const { toast } = useToast();
   const [teams] = useLocalStorage<Team[]>("hackathon_teams", []);
   const [submissions] = useLocalStorage<Submission[]>("hackathon_submissions", []);
-  const [evaluations, setEvaluations] = useLocalStorage<Evaluation[]>("hackathon_evaluations", []);
+  const [evaluations, setEvaluations] = useLocalStorage<EvaluationType[]>("hackathon_evaluations", []);
   const [currentSubmissionIndex, setCurrentSubmissionIndex] = useState(0);
 
   const form = useForm<EvaluationFormData>({
@@ -58,7 +58,7 @@ const Evaluation = () => {
   const onSubmit = (data: EvaluationFormData) => {
     if (!currentSubmission) return;
 
-    const newEvaluation: Evaluation = {
+    const newEvaluation: EvaluationType = {
       id: Date.now().toString(),
       submissionId: currentSubmission.id,
       teamId: currentSubmission.teamId,
