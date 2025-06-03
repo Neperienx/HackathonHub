@@ -12,10 +12,10 @@ const PublicProjects = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Simplified query without orderBy to avoid index requirements
     const publicProjectsQuery = query(
       collection(db, 'projects'),
-      where('status', '==', 'public'),
-      orderBy('updatedAt', 'desc')
+      where('status', '==', 'public')
     );
 
     const unsubscribe = onSnapshot(publicProjectsQuery, (snapshot) => {
@@ -23,7 +23,14 @@ const PublicProjects = () => {
         id: doc.id,
         ...doc.data()
       })) as Project[];
+      
+      // Sort client-side to avoid index requirements
+      projectsData.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+      
       setProjects(projectsData);
+      setLoading(false);
+    }, (error) => {
+      console.error('Error loading public projects:', error);
       setLoading(false);
     });
 

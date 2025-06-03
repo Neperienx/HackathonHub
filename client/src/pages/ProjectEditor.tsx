@@ -94,11 +94,19 @@ const ProjectEditor = ({ params }: { params: { id: string } }) => {
         title: "Project Saved",
         description: "Your project has been saved successfully.",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving project:', error);
+      let errorMessage = "Failed to save project. Please try again.";
+      
+      if (error.code === 'permission-denied') {
+        errorMessage = "Permission denied. Please check your Firestore security rules.";
+      } else if (error.code === 'unavailable') {
+        errorMessage = "Database unavailable. Please check your Firebase configuration.";
+      }
+      
       toast({
         title: "Save Failed",
-        description: "Failed to save project. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

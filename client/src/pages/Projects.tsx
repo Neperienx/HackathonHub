@@ -23,10 +23,10 @@ const Projects = () => {
       return;
     }
 
+    // Simplified query without orderBy to avoid index requirements
     const projectsQuery = query(
       collection(db, 'projects'),
-      where('userId', '==', user.uid),
-      orderBy('updatedAt', 'desc')
+      where('userId', '==', user.uid)
     );
 
     const unsubscribe = onSnapshot(projectsQuery, (snapshot) => {
@@ -34,8 +34,20 @@ const Projects = () => {
         id: doc.id,
         ...doc.data()
       })) as Project[];
+      
+      // Sort client-side to avoid index requirements
+      projectsData.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+      
       setProjects(projectsData);
       setLoading(false);
+    }, (error) => {
+      console.error('Error loading projects:', error);
+      setLoading(false);
+      toast({
+        title: "Loading Error",
+        description: "Failed to load projects. Please check your Firestore configuration.",
+        variant: "destructive",
+      });
     });
 
     return () => unsubscribe();
