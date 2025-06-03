@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
-import { Save, ArrowLeft, Globe, Lock, Loader2 } from "lucide-react";
+import { Save, ArrowLeft, Globe, Lock, Loader2, Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +12,7 @@ import { db } from "@/lib/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { Project } from "@/types";
 import { useToast } from "@/hooks/use-toast";
+import { resizeImage, validateImageFile } from "@/lib/imageUtils";
 
 const ProjectEditor = ({ params }: { params: { id: string } }) => {
   const [, setLocation] = useLocation();
@@ -20,6 +21,8 @@ const ProjectEditor = ({ params }: { params: { id: string } }) => {
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!user) {
@@ -75,12 +78,52 @@ const ProjectEditor = ({ params }: { params: { id: string } }) => {
     });
   };
 
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (!validateImageFile(file)) {
+      toast({
+        title: "Invalid File",
+        description: "Please select a valid image file (JPEG, PNG, WebP) under 10MB.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const resizedImage = await resizeImage(file);
+      handleInputChange('image', resizedImage);
+      toast({
+        title: "Image Uploaded",
+        description: "Your project image has been uploaded successfully.",
+      });
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      toast({
+        title: "Upload Failed",
+        description: "Failed to process image. Please try a smaller file.",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const removeImage = () => {
+    handleInputChange('image', '');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
   const saveProject = async () => {
     if (!project || !user) return;
 
     setSaving(true);
     try {
-      await updateDoc(doc(db, 'projects', project.id), {
+      const updateData: any = {
         title: project.title,
         pitch: project.pitch,
         mvpInfo: project.mvpInfo,
@@ -88,7 +131,13 @@ const ProjectEditor = ({ params }: { params: { id: string } }) => {
         market: project.market,
         status: project.status,
         updatedAt: new Date().toISOString(),
-      });
+      };
+
+      if (project.image) {
+        updateData.image = project.image;
+      }
+
+      await updateDoc(doc(db, 'projects', project.id), updateData);
 
       toast({
         title: "Project Saved",
@@ -203,6 +252,77 @@ const ProjectEditor = ({ params }: { params: { id: string } }) => {
                 placeholder="Enter your project title"
                 className="mt-2"
               />
+            </div>
+
+            <div>
+              <Label>Project Image</Label>
+              <div className="mt-2 space-y-4">
+                {project.image ? (
+                  <div className="relative inline-block">
+                    <img
+                      src={project.image}
+                      alt="Project preview"
+                      className="w-full max-w-md h-48 object-cover rounded-lg border"
+                    />
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="sm"
+                      className="absolute top-2 right-2"
+                      onClick={removeImage}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                    <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-600 mb-2">Upload a project image</p>
+                    <p className="text-sm text-gray-500">JPEG, PNG, or WebP up to 10MB</p>
+                  </div>
+                )}
+                
+                <div className="flex items-center space-x-3">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={uploading}
+                    className="flex items-center space-x-2"
+                  >
+                    {uploading ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <span>Processing...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="h-4 w-4" />
+                        <span>{project.image ? 'Change Image' : 'Upload Image'}</span>
+                      </>
+                    )}
+                  </Button>
+                  
+                  {project.image && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      onClick={removeImage}
+                      className="text-red-600 hover:text-red-800"
+                    >
+                      Remove Image
+                    </Button>
+                  )}
+                </div>
+                
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/jpeg,image/jpg,image/png,image/webp"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+              </div>
             </div>
 
             <div>

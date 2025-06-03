@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
-import { Globe, Calendar, User, Eye } from "lucide-react";
+import { Globe, Calendar, User, Eye, Heart, HeartOff } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuth } from "@/contexts/AuthContext";
 import { db } from "@/lib/firebase";
-import { collection, query, where, orderBy, onSnapshot } from "firebase/firestore";
-import { Project } from "@/types";
+import { collection, query, where, onSnapshot, addDoc, deleteDoc, doc, getDocs, updateDoc, increment } from "firebase/firestore";
+import { Project, ProjectUpvote } from "@/types";
+import { useToast } from "@/hooks/use-toast";
 
 const PublicProjects = () => {
+  const { user } = useAuth();
+  const { toast } = useToast();
   const [projects, setProjects] = useState<Project[]>([]);
+  const [userUpvotes, setUserUpvotes] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

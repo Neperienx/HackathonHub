@@ -65,6 +65,7 @@ const Projects = () => {
         resourcesNecessary: "",
         market: "",
         status: "private" as const,
+        upvotes: 0,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };

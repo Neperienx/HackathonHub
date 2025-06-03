@@ -7,8 +7,17 @@ export interface Project {
   resourcesNecessary: string;
   market: string;
   status: 'private' | 'public';
+  image?: string; // Base64 encoded image
+  upvotes: number;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface ProjectUpvote {
+  id: string;
+  projectId: string;
+  userId: string;
+  createdAt: string;
 }
 
 export interface Config {
