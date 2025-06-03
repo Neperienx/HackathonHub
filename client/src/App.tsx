@@ -5,6 +5,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import Layout from "@/components/Layout";
 import Landing from "@/pages/Landing";
 import Rules from "@/pages/Rules";
+import Projects from "@/pages/Projects";
 import NotFound from "@/pages/not-found";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Layout>
           <Route path="/" component={Landing} />
           <Route path="/rules" component={Rules} />
+          <Route path="/projects" component={Projects} />
           <Route component={NotFound} />
           <Toaster />
         </Layout>

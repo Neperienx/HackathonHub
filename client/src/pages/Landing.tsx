@@ -48,16 +48,29 @@ const Landing = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button
-                className="btn-innovation group relative overflow-hidden"
-                onClick={() => setLocation('/signup')}
-              >
-                <div className="relative z-10 flex items-center">
-                  <Users className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
-                  Start Your Innovation Journey
-                </div>
-                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-              </button>
+              {user ? (
+                <button
+                  className="btn-innovation group relative overflow-hidden"
+                  onClick={() => setLocation('/projects')}
+                >
+                  <div className="relative z-10 flex items-center">
+                    <Zap className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
+                    Go to My Projects
+                  </div>
+                  <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </button>
+              ) : (
+                <button
+                  className="btn-innovation group relative overflow-hidden"
+                  onClick={signInWithGoogle}
+                >
+                  <div className="relative z-10 flex items-center">
+                    <Users className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
+                    Start Your Innovation Journey
+                  </div>
+                  <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </button>
+              )}
               
               <button
                 className="px-8 py-3 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
