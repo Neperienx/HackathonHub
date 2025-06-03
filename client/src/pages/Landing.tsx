@@ -2,10 +2,12 @@ import { useLocation } from "wouter";
 import { Rocket, Flag, Target, Upload, Trophy, Clock, Users, Gift, Zap, Lightbulb, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useAuth } from "@/contexts/AuthContext";
 import config from "@/data/config.json";
 
 const Landing = () => {
   const [, setLocation] = useLocation();
+  const { user, signInWithGoogle } = useAuth();
 
   const timelineIcons = [Rocket, Flag, Target, Upload, Trophy];
   const timelineColors = [

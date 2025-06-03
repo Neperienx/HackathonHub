@@ -1,24 +1,42 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Zap, Sparkles } from "lucide-react";
+import { Menu, X, Zap, Sparkles, LogOut, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
 import config from "@/data/config.json";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [location] = useLocation();
+  const { user, logout, signInWithGoogle } = useAuth();
 
-  const navigationItems = [
+  const publicNavItems = [
     { label: "Home", path: "/" },
     { label: "Rules", path: "/rules" },
-    { label: "Resources", path: "/resources" },
-    { label: "Sign Up", path: "/signup" },
-    { label: "Dashboard", path: "/dashboard" },
-    { label: "Submit", path: "/submission" },
-    { label: "Evaluate", path: "/evaluation" },
   ];
+
+  const authenticatedNavItems = [
+    { label: "Home", path: "/" },
+    { label: "Rules", path: "/rules" },
+    { label: "My Projects", path: "/projects" },
+  ];
+
+  const navigationItems = user ? authenticatedNavItems : publicNavItems;
 
   const isActive = (path: string) => {
     return location === path;
+  };
+
+  const handleAuthAction = async () => {
+    try {
+      if (user) {
+        await logout();
+      } else {
+        await signInWithGoogle();
+      }
+    } catch (error) {
+      console.error('Authentication error:', error);
+    }
   };
 
   return (
@@ -54,6 +72,35 @@ const Navigation = () => {
                 ))}
               </div>
             </div>
+          </div>
+
+          {/* Auth Section */}
+          <div className="hidden md:flex items-center space-x-4">
+            {user ? (
+              <>
+                <div className="flex items-center space-x-2 text-gray-700">
+                  <User className="h-5 w-5" />
+                  <span className="text-sm font-medium">{user.displayName}</span>
+                </div>
+                <Button
+                  onClick={handleAuthAction}
+                  variant="outline"
+                  size="sm"
+                  className="flex items-center space-x-2"
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span>Sign Out</span>
+                </Button>
+              </>
+            ) : (
+              <Button
+                onClick={handleAuthAction}
+                className="btn-innovation"
+              >
+                <User className="h-4 w-4 mr-2" />
+                Sign In
+              </Button>
+            )}
           </div>
           
           {/* Mobile menu button */}
@@ -91,6 +138,33 @@ const Navigation = () => {
                 {item.label}
               </Link>
             ))}
+            
+            {/* Mobile Auth */}
+            <div className="pt-4 border-t border-gray-200/50">
+              {user ? (
+                <div className="space-y-2">
+                  <div className="px-4 py-2 text-gray-700 text-sm">
+                    {user.displayName}
+                  </div>
+                  <Button
+                    onClick={handleAuthAction}
+                    variant="outline"
+                    className="w-full"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sign Out
+                  </Button>
+                </div>
+              ) : (
+                <Button
+                  onClick={handleAuthAction}
+                  className="w-full btn-innovation"
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  Sign In
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       )}

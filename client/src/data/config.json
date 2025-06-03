@@ -1,6 +1,6 @@
 {
   "landing": {
-    "title": "InnovateHack 2025",
+    "title": "Bosch Spark",
     "description": "A hackathon to explore repurposing Bosch XC technologies for innovative new applications",
     "timeline": [
       { "label": "Launch", "date": "2025-06-10" },
@@ -17,8 +17,14 @@
   },
   "resources": {
     "technologies": [
-      { "name": "Radar Sensor A", "description": "Short-range radar for automation and detection applications" },
-      { "name": "Ultrasonic Module B", "description": "Used in parking sensors, adaptable for robotics and proximity detection" }
+      {
+        "name": "Radar Sensor A",
+        "description": "Short-range radar for automation and detection applications"
+      },
+      {
+        "name": "Ultrasonic Module B",
+        "description": "Used in parking sensors, adaptable for robotics and proximity detection"
+      }
     ]
   }
 }
