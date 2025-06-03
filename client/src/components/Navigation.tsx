@@ -13,11 +13,13 @@ const Navigation = () => {
   const publicNavItems = [
     { label: "Home", path: "/" },
     { label: "Rules", path: "/rules" },
+    { label: "Showcase", path: "/showcase" },
   ];
 
   const authenticatedNavItems = [
     { label: "Home", path: "/" },
     { label: "Rules", path: "/rules" },
+    { label: "Showcase", path: "/showcase" },
     { label: "My Projects", path: "/projects" },
   ];
 
