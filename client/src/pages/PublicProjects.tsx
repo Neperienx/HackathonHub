@@ -18,7 +18,7 @@ const PublicProjects = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simplified query without orderBy to avoid index requirements
+    // Load public projects
     const publicProjectsQuery = query(
       collection(db, 'projects'),
       where('status', '==', 'public')
@@ -30,8 +30,13 @@ const PublicProjects = () => {
         ...doc.data()
       })) as Project[];
       
-      // Sort client-side to avoid index requirements
-      projectsData.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+      // Sort by upvotes first, then by date
+      projectsData.sort((a, b) => {
+        if (b.upvotes !== a.upvotes) {
+          return b.upvotes - a.upvotes;
+        }
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+      });
       
       setProjects(projectsData);
       setLoading(false);
@@ -42,6 +47,87 @@ const PublicProjects = () => {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    // Load user's upvotes if authenticated
+    if (!user) return;
+
+    const loadUserUpvotes = async () => {
+      try {
+        const upvotesQuery = query(
+          collection(db, 'upvotes'),
+          where('userId', '==', user.uid)
+        );
+        const upvotesSnapshot = await getDocs(upvotesQuery);
+        const upvotedProjects = new Set(
+          upvotesSnapshot.docs.map(doc => doc.data().projectId)
+        );
+        setUserUpvotes(upvotedProjects);
+      } catch (error) {
+        console.error('Error loading user upvotes:', error);
+      }
+    };
+
+    loadUserUpvotes();
+  }, [user]);
+
+  const handleUpvote = async (projectId: string) => {
+    if (!user) {
+      toast({
+        title: "Sign In Required",
+        description: "Please sign in to upvote projects.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const hasUpvoted = userUpvotes.has(projectId);
+      
+      if (hasUpvoted) {
+        // Remove upvote
+        const upvotesQuery = query(
+          collection(db, 'upvotes'),
+          where('userId', '==', user.uid),
+          where('projectId', '==', projectId)
+        );
+        const upvotesSnapshot = await getDocs(upvotesQuery);
+        
+        if (!upvotesSnapshot.empty) {
+          await deleteDoc(doc(db, 'upvotes', upvotesSnapshot.docs[0].id));
+          await updateDoc(doc(db, 'projects', projectId), {
+            upvotes: increment(-1)
+          });
+          
+          setUserUpvotes(prev => {
+            const newSet = new Set(prev);
+            newSet.delete(projectId);
+            return newSet;
+          });
+        }
+      } else {
+        // Add upvote
+        await addDoc(collection(db, 'upvotes'), {
+          projectId,
+          userId: user.uid,
+          createdAt: new Date().toISOString(),
+        });
+        
+        await updateDoc(doc(db, 'projects', projectId), {
+          upvotes: increment(1)
+        });
+        
+        setUserUpvotes(prev => new Set(prev).add(projectId));
+      }
+    } catch (error) {
+      console.error('Error handling upvote:', error);
+      toast({
+        title: "Error",
+        description: "Failed to update upvote. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   if (loading) {
     return (
@@ -98,6 +184,17 @@ const PublicProjects = () => {
                 key={project.id}
                 className="card-modern group hover:scale-105 transition-all duration-300"
               >
+                {project.image && (
+                  <div className="relative overflow-hidden rounded-t-lg">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300" />
+                  </div>
+                )}
+                
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between mb-2">
                     <CardTitle className="text-lg font-semibold text-gray-900 group-hover:text-purple-600 transition-colors line-clamp-2">
@@ -142,8 +239,8 @@ const PublicProjects = () => {
                     </div>
                   )}
 
-                  <div className="flex items-center justify-between text-xs text-gray-500 mt-4 pt-4 border-t">
-                    <div className="flex items-center space-x-2">
+                  <div className="flex items-center justify-between mt-4 pt-4 border-t">
+                    <div className="flex items-center space-x-2 text-xs text-gray-500">
                       <Avatar className="h-6 w-6">
                         <AvatarImage src="" />
                         <AvatarFallback className="text-xs">
@@ -151,10 +248,29 @@ const PublicProjects = () => {
                         </AvatarFallback>
                       </Avatar>
                       <span>Anonymous</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
+                      <span>•</span>
                       <Calendar className="w-3 h-3" />
                       <span>{new Date(project.updatedAt).toLocaleDateString()}</span>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant={userUpvotes.has(project.id) ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => handleUpvote(project.id)}
+                        className={`flex items-center space-x-1 ${
+                          userUpvotes.has(project.id) 
+                            ? "bg-red-500 hover:bg-red-600 text-white" 
+                            : "hover:bg-red-50 hover:text-red-600 hover:border-red-300"
+                        }`}
+                      >
+                        {userUpvotes.has(project.id) ? (
+                          <Heart className="w-4 h-4 fill-current" />
+                        ) : (
+                          <Heart className="w-4 h-4" />
+                        )}
+                        <span className="text-sm font-medium">{project.upvotes || 0}</span>
+                      </Button>
                     </div>
                   </div>
                 </CardContent>

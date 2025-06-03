@@ -11,6 +11,19 @@ service cloud.firestore {
       
       // Allow anyone to read public projects
       allow read: if resource.data.status == 'public';
+      
+      // Allow authenticated users to update upvote counts
+      allow update: if request.auth != null && 
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['upvotes']);
+    }
+    
+    // Upvotes collection rules
+    match /upvotes/{upvoteId} {
+      // Allow users to create their own upvotes
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+      
+      // Allow users to read and delete their own upvotes
+      allow read, delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }
   }
 }
