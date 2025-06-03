@@ -1,17 +1,19 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { LocalAuthService } from '@/lib/localAuth';
-
-interface LocalUser {
-  id: string;
-  email: string;
-  name: string;
-  displayName: string;
-  createdAt: string;
-}
+import { 
+  User, 
+  signInWithPopup, 
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut, 
+  onAuthStateChanged,
+  updateProfile
+} from 'firebase/auth';
+import { auth, googleProvider } from '@/lib/firebase';
 
 interface AuthContextType {
-  user: LocalUser | null;
+  user: User | null;
   loading: boolean;
+  signInWithGoogle: () => Promise<void>;
   signInWithEmail: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signUpWithEmail: (email: string, password: string, name: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
@@ -32,55 +34,59 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<LocalUser | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing user on mount
-    const currentUser = LocalAuthService.getCurrentUser();
-    if (currentUser) {
-      setUser({
-        ...currentUser,
-        displayName: currentUser.name
-      });
-    }
-    setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    return unsubscribe;
   }, []);
 
-  const signInWithEmail = async (email: string, password: string) => {
-    const result = LocalAuthService.signIn(email, password);
-    if (result.success && result.user) {
-      const authUser = {
-        ...result.user,
-        displayName: result.user.name
-      };
-      setUser(authUser);
-      return { success: true };
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (error) {
+      console.error('Error signing in with Google:', error);
+      throw error;
     }
-    return { success: false, error: result.error };
+  };
+
+  const signInWithEmail = async (email: string, password: string) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      return { success: true };
+    } catch (error: any) {
+      return { success: false, error: error.message };
+    }
   };
 
   const signUpWithEmail = async (email: string, password: string, name: string) => {
-    const result = LocalAuthService.signUp(email, password, name);
-    if (result.success && result.user) {
-      const authUser = {
-        ...result.user,
-        displayName: result.user.name
-      };
-      setUser(authUser);
+    try {
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(result.user, { displayName: name });
       return { success: true };
+    } catch (error: any) {
+      return { success: false, error: error.message };
     }
-    return { success: false, error: result.error };
   };
 
   const logout = async () => {
-    LocalAuthService.signOut();
-    setUser(null);
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Error signing out:', error);
+      throw error;
+    }
   };
 
   const value = {
     user,
     loading,
+    signInWithGoogle,
     signInWithEmail,
     signUpWithEmail,
     logout,

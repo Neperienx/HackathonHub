@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
+import { db } from "@/lib/firebase";
+import { collection, query, where, orderBy, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { Project } from "@/types";
 import { useToast } from "@/hooks/use-toast";
 
@@ -21,25 +23,30 @@ const Projects = () => {
       return;
     }
 
-    // Using localStorage for project storage
-    const userProjects = JSON.parse(localStorage.getItem(`projects_${user.id}`) || '[]');
-    setProjects(userProjects);
-    setLoading(false);
-  }, [user, setLocation]);
+    const projectsQuery = query(
+      collection(db, 'projects'),
+      where('userId', '==', user.uid),
+      orderBy('updatedAt', 'desc')
+    );
 
-  const saveProjects = (updatedProjects: Project[]) => {
-    if (!user) return;
-    localStorage.setItem(`projects_${user.id}`, JSON.stringify(updatedProjects));
-    setProjects(updatedProjects);
-  };
+    const unsubscribe = onSnapshot(projectsQuery, (snapshot) => {
+      const projectsData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as Project[];
+      setProjects(projectsData);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [user, setLocation]);
 
   const createNewProject = async () => {
     if (!user) return;
 
     try {
-      const newProject: Project = {
-        id: Date.now().toString(),
-        userId: user.id,
+      const newProject = {
+        userId: user.uid,
         title: "Untitled Project",
         pitch: "",
         mvpInfo: "",
@@ -50,8 +57,8 @@ const Projects = () => {
         updatedAt: new Date().toISOString(),
       };
 
-      const updatedProjects = [newProject, ...projects];
-      saveProjects(updatedProjects);
+      const docRef = await addDoc(collection(db, 'projects'), newProject);
+      setLocation(`/project/${docRef.id}`);
       
       toast({
         title: "Project Created",
@@ -69,8 +76,7 @@ const Projects = () => {
 
   const deleteProject = async (projectId: string) => {
     try {
-      const updatedProjects = projects.filter(p => p.id !== projectId);
-      saveProjects(updatedProjects);
+      await deleteDoc(doc(db, 'projects', projectId));
       toast({
         title: "Project Deleted",
         description: "Your project has been deleted successfully.",
@@ -179,12 +185,7 @@ const Projects = () => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => {
-                      toast({
-                        title: "Project Editor",
-                        description: "Project editing feature coming soon!",
-                      });
-                    }}
+                    onClick={() => setLocation(`/project/${project.id}`)}
                     className="opacity-0 group-hover:opacity-100 transition-opacity"
                   >
                     <Edit className="h-4 w-4" />
