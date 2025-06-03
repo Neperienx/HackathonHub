@@ -7,7 +7,7 @@ import config from "@/data/config.json";
 
 const Landing = () => {
   const [, setLocation] = useLocation();
-  const { user, signInWithGoogle } = useAuth();
+  const { user } = useAuth();
 
   const timelineIcons = [Rocket, Flag, Target, Upload, Trophy];
   const timelineColors = [

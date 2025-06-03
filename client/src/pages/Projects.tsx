@@ -5,8 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
-import { db } from "@/lib/firebase";
-import { collection, query, where, orderBy, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { Project } from "@/types";
 import { useToast } from "@/hooks/use-toast";
 
@@ -23,30 +21,25 @@ const Projects = () => {
       return;
     }
 
-    const projectsQuery = query(
-      collection(db, 'projects'),
-      where('userId', '==', user.uid),
-      orderBy('updatedAt', 'desc')
-    );
-
-    const unsubscribe = onSnapshot(projectsQuery, (snapshot) => {
-      const projectsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as Project[];
-      setProjects(projectsData);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
+    // Using localStorage for project storage
+    const userProjects = JSON.parse(localStorage.getItem(`projects_${user.id}`) || '[]');
+    setProjects(userProjects);
+    setLoading(false);
   }, [user, setLocation]);
+
+  const saveProjects = (updatedProjects: Project[]) => {
+    if (!user) return;
+    localStorage.setItem(`projects_${user.id}`, JSON.stringify(updatedProjects));
+    setProjects(updatedProjects);
+  };
 
   const createNewProject = async () => {
     if (!user) return;
 
     try {
-      const newProject = {
-        userId: user.uid,
+      const newProject: Project = {
+        id: Date.now().toString(),
+        userId: user.id,
         title: "Untitled Project",
         pitch: "",
         mvpInfo: "",
@@ -57,8 +50,8 @@ const Projects = () => {
         updatedAt: new Date().toISOString(),
       };
 
-      const docRef = await addDoc(collection(db, 'projects'), newProject);
-      setLocation(`/project/${docRef.id}`);
+      const updatedProjects = [newProject, ...projects];
+      saveProjects(updatedProjects);
       
       toast({
         title: "Project Created",
@@ -76,7 +69,8 @@ const Projects = () => {
 
   const deleteProject = async (projectId: string) => {
     try {
-      await deleteDoc(doc(db, 'projects', projectId));
+      const updatedProjects = projects.filter(p => p.id !== projectId);
+      saveProjects(updatedProjects);
       toast({
         title: "Project Deleted",
         description: "Your project has been deleted successfully.",
@@ -146,7 +140,12 @@ const Projects = () => {
             <Card
               key={project.id}
               className="card-modern group hover:scale-105 transition-all duration-300 cursor-pointer"
-              onClick={() => setLocation(`/project/${project.id}`)}
+              onClick={() => {
+                toast({
+                  title: "Project Details",
+                  description: "Project detail view coming soon!",
+                });
+              }}
             >
               <CardHeader className="pb-3">
                 <div className="flex justify-between items-start mb-2">
@@ -180,7 +179,12 @@ const Projects = () => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => setLocation(`/project/${project.id}`)}
+                    onClick={() => {
+                      toast({
+                        title: "Project Editor",
+                        description: "Project editing feature coming soon!",
+                      });
+                    }}
                     className="opacity-0 group-hover:opacity-100 transition-opacity"
                   >
                     <Edit className="h-4 w-4" />
