@@ -62,7 +62,7 @@ const Landing = () => {
               ) : (
                 <button
                   className="btn-innovation group relative overflow-hidden"
-                  onClick={signInWithGoogle}
+                  onClick={() => setLocation('/auth')}
                 >
                   <div className="relative z-10 flex items-center">
                     <Users className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform duration-300" />

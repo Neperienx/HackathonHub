@@ -7,8 +7,8 @@ import config from "@/data/config.json";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
-  const { user, logout, signInWithGoogle } = useAuth();
+  const [location, setLocation] = useLocation();
+  const { user, logout } = useAuth();
 
   const publicNavItems = [
     { label: "Home", path: "/" },
@@ -32,7 +32,7 @@ const Navigation = () => {
       if (user) {
         await logout();
       } else {
-        await signInWithGoogle();
+        setLocation('/auth');
       }
     } catch (error) {
       console.error('Authentication error:', error);

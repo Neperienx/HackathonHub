@@ -6,6 +6,7 @@ import Layout from "@/components/Layout";
 import Landing from "@/pages/Landing";
 import Rules from "@/pages/Rules";
 import Projects from "@/pages/Projects";
+import Auth from "@/pages/Auth";
 import NotFound from "@/pages/not-found";
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
           <Route path="/" component={Landing} />
           <Route path="/rules" component={Rules} />
           <Route path="/projects" component={Projects} />
-          <Route component={NotFound} />
+          <Route path="/auth" component={Auth} />
+          <Route path="/:rest*" component={NotFound} />
           <Toaster />
         </Layout>
       </AuthProvider>
