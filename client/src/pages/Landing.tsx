@@ -43,8 +43,11 @@ const Landing = () => {
               {config.landing.title}
             </h1>
             
-            <p className="text-xl md:text-2xl mb-12 text-blue-100 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl mb-6 text-blue-100 max-w-4xl mx-auto leading-relaxed">
               {config.landing.description}
+            </p>
+            <p className="text-lg mb-12 text-blue-200 max-w-3xl mx-auto leading-relaxed">
+              {config.landing.subtitle}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -127,53 +130,73 @@ const Landing = () => {
         </div>
       </div>
 
-      {/* Quick Stats Section */}
+      {/* Why Participate Section */}
+      <div className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              🌟 Why Participate?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Join Company Spark and unlock your potential while making a real impact on our organization.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {config.landing.benefits.map((benefit, index) => {
+              const icons = [Lightbulb, Users, Zap, Gift];
+              const IconComponent = icons[index] || Lightbulb;
+              
+              return (
+                <div
+                  key={index}
+                  className="card-modern group hover:scale-105 transition-all duration-300 p-8 text-center"
+                >
+                  <div className="w-16 h-16 bg-gradient-innovation rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <IconComponent className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {benefit.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* How It Works Section */}
       <div className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-blue-50"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Join the Innovation Challenge?</h2>
-            <p className="text-xl text-gray-600">Experience the thrill of turning ideas into reality</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              🔁 How It Works
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Simple steps to join and participate in Company Spark hackathons.
+            </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="card-modern text-center p-8 group hover:scale-105 transition-all duration-300">
-              <div className="relative mb-6">
-                <div className="w-20 h-20 bg-gradient-innovation rounded-2xl flex items-center justify-center mx-auto group-hover:rotate-12 transition-transform duration-300">
-                  <Clock className="h-10 w-10 text-white" />
+
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-8">
+              {config.landing.howItWorks.map((step, index) => (
+                <div key={index} className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-10 h-10 bg-gradient-innovation rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      {index + 1}
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-lg text-gray-900 font-medium leading-relaxed">
+                      {step}
+                    </p>
+                  </div>
                 </div>
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
-                  <Sparkles className="h-3 w-3 text-white" />
-                </div>
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-3">3 Weeks</h3>
-              <p className="text-gray-600 text-lg">To transform your breakthrough idea into reality</p>
-            </div>
-            
-            <div className="card-modern text-center p-8 group hover:scale-105 transition-all duration-300">
-              <div className="relative mb-6">
-                <div className="w-20 h-20 bg-gradient-innovation rounded-2xl flex items-center justify-center mx-auto group-hover:rotate-12 transition-transform duration-300">
-                  <Users className="h-10 w-10 text-white" />
-                </div>
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center">
-                  <Zap className="h-3 w-3 text-white" />
-                </div>
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-3">{config.rules.teamSize}</h3>
-              <p className="text-gray-600 text-lg">Cross-functional teams for maximum innovation</p>
-            </div>
-            
-            <div className="card-modern text-center p-8 group hover:scale-105 transition-all duration-300">
-              <div className="relative mb-6">
-                <div className="w-20 h-20 bg-gradient-innovation rounded-2xl flex items-center justify-center mx-auto group-hover:rotate-12 transition-transform duration-300">
-                  <Trophy className="h-10 w-10 text-white" />
-                </div>
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-purple-400 rounded-full flex items-center justify-center">
-                  <Gift className="h-3 w-3 text-white" />
-                </div>
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-3">Epic Rewards</h3>
-              <p className="text-gray-600 text-lg">Recognition, prizes, and career opportunities await</p>
+              ))}
             </div>
           </div>
         </div>

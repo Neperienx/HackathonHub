@@ -1,0 +1,98 @@
+🧠 What is Company Spark?
+Company Spark is an internal platform designed to ignite innovation from within. Through recurring hackathon-style events, employees across departments can form teams, develop ideas, and create solutions that push the company forward.
+
+It’s about unlocking creativity, encouraging collaboration, and making the most of our collective talent—across engineering, business, software, and operations.
+
+🌟 Why Participate?
+Empower Your Ideas: Bring that side-project or breakthrough concept to life.
+
+Collaborate Across the Organization: Work with colleagues outside your usual bubble.
+
+Grow Skills: Learn, build, and innovate in a low-stakes, high-impact environment.
+
+Get Recognized: Winning teams get visibility and support for further development.
+
+🔁 How It Works
+Register for the next hackathon.
+
+Form a Team or join one based on interests and skills.
+
+Build a Solution during the hackathon cycle.
+
+Submit your project for review and feedback.
+
+Showcase on the public Company Spark dashboard.
+
+🖼️ Highlight Section (Optional)
+Include a carousel or grid showing:
+
+Top past projects (with thumbnails or tags)
+
+Testimonials or team quotes (e.g., “We built something real—and met new teammates too!”)
+
+🧭 Navigation Panel / Footer Links
+Upcoming Events
+
+Rules & Guidelines
+
+Team Registration
+
+Project Showcase
+
+Admin Portal (if applicable)
+
+📜 Rules & Guidelines Page Content
+✅ Participation Rules
+Open to all full-time employees.
+
+Cross-department collaboration encouraged.
+
+Teams of 2 to 5 members.
+
+Individual contributors may apply to join open teams.
+
+🕐 Hackathon Timeline
+Registration Opens: [Date]
+
+Team Formation Deadline: [Date]
+
+Hackathon Start: [Date & Time]
+
+Submission Deadline: [Date & Time]
+
+Judging + Results: [Date]
+
+💼 Project Scope
+Should align with company values: innovation, sustainability, technology, or employee wellbeing.
+
+Can be hardware, software, service-oriented, or process improvement.
+
+Must be original—no pre-existing or commercialized projects.
+
+📦 Submission Requirements
+Project title and short summary
+
+Description of problem and solution
+
+Screenshots or demo video (if applicable)
+
+GitHub/Figma links (optional)
+
+Team member names and roles
+
+🏆 Evaluation Criteria
+Criterion	Description
+Innovation	How novel or original is the idea?
+Impact	Can it scale or improve a process internally?
+Feasibility	Can it be realistically implemented?
+Teamwork	How well did the team collaborate?
+Presentation	Is the final submission clear and compelling?
+
+📌 Code of Conduct
+Be respectful and inclusive.
+
+Intellectual property remains with creators unless otherwise agreed.
+
+Use company time/resources responsibly.
+
+Collaboration over competition—Company Spark is about growing ideas, not just winning.
