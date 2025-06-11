@@ -33,11 +33,8 @@ const Rules = () => {
               <Flame className="h-10 w-10 text-white" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Theme: "{rulesConfig.theme.title}"
+              Theme: "{rulesConfig.theme.name}"
             </h2>
-            <p className="text-xl md:text-2xl text-gray-700 font-medium mb-6 max-w-4xl mx-auto">
-              {rulesConfig.theme.subtitle}
-            </p>
           </div>
 
           <div className="card-modern p-8 max-w-4xl mx-auto">

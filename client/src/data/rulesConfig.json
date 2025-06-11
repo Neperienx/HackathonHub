@@ -2,10 +2,9 @@
   "title": "Rules & Guidelines",
   "description": "Everything you need to know to participate in Company Spark hackathons successfully.",
   "theme": {
-    "title": "Re:Ignite – New Purpose, New Potential",
-    "subtitle": "Take what already exists—and spark something entirely new.",
+    "name": "Re:Ignite – New Purpose, New Potential Testsearch",
     "tagline": "Reimagine. Repurpose. Reinvent.",
-    "description": "\"Re:Ignite\" challenges Bosch innovators to look inward—to our rich portfolio of products, components, and technologies—and envision bold, unexpected applications. Whether it's using automotive sensors in healthcare, repurposing home appliances for new markets, or transforming legacy systems into digital services, this hackathon is about finding hidden potential in the familiar."
+    "description": "Re:Ignite challenges Bosch innovators to look inward—to our rich portfolio of products, components, and technologies—and envision bold, unexpected applications. Whether it's using automotive sensors in healthcare, repurposing home appliances for new markets, or transforming legacy systems into digital services, this hackathon is about finding hidden potential in the familiar."
   },
   "participation": {
     "eligibility": "All company employees, contractors, and interns are welcome to participate",
