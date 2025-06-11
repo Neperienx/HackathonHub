@@ -30,15 +30,19 @@ const Landing = () => {
               </div>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-8 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-              {homeConfig.title}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent leading-tight">
+              {homeConfig.tagline}
             </h1>
             
-            <p className="text-xl md:text-2xl mb-6 text-blue-100 max-w-4xl mx-auto leading-relaxed">
+            <div className="relative mb-10">
+              <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-cyan-300 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
+                {homeConfig.subtitle}
+              </p>
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+            </div>
+            
+            <p className="text-lg md:text-xl mb-12 text-blue-200 max-w-4xl mx-auto leading-relaxed">
               {homeConfig.description}
-            </p>
-            <p className="text-lg mb-12 text-blue-200 max-w-3xl mx-auto leading-relaxed">
-              {homeConfig.subtitle}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
