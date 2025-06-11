@@ -24,6 +24,43 @@ const Rules = () => {
         </p>
       </div>
 
+      {/* Theme Section */}
+      <div className="relative py-16 mb-16 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-red-50"></div>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mb-6">
+              <span className="text-3xl">🔥</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Theme: "{rulesConfig.theme.title}"
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-700 font-medium mb-6 max-w-4xl mx-auto">
+              {rulesConfig.theme.subtitle}
+            </p>
+          </div>
+
+          <div className="card-modern p-8 max-w-4xl mx-auto">
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-bold text-orange-600 mb-2">🧠 Tagline:</h3>
+              <p className="text-xl font-semibold text-gray-800 italic">
+                "{rulesConfig.theme.tagline}"
+              </p>
+            </div>
+            
+            <div className="border-t border-gray-200 pt-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                <span className="mr-2">🧠</span>
+                Theme Description:
+              </h3>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                {rulesConfig.theme.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Timeline Section */}
       <div className="relative py-16 mb-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-blue-50"></div>

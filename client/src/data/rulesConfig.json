@@ -1,6 +1,12 @@
 {
   "title": "Rules & Guidelines",
   "description": "Everything you need to know to participate in Company Spark hackathons successfully.",
+  "theme": {
+    "title": "Re:Ignite – New Purpose, New Potential",
+    "subtitle": "Take what already exists—and spark something entirely new.",
+    "tagline": "Reimagine. Repurpose. Reinvent.",
+    "description": "\"Re:Ignite\" challenges Bosch innovators to look inward—to our rich portfolio of products, components, and technologies—and envision bold, unexpected applications. Whether it's using automotive sensors in healthcare, repurposing home appliances for new markets, or transforming legacy systems into digital services, this hackathon is about finding hidden potential in the familiar."
+  },
   "participation": {
     "eligibility": "All company employees, contractors, and interns are welcome to participate",
     "teamSize": "Teams of 2-5 members (individual participation also allowed)",
@@ -9,31 +15,30 @@
   },
   "timeline": [
     {
-      "event": "Registration Opens",
-      "date": "Monday, January 15, 2025"
-    },
-    {
       "event": "Kickoff Event",
-      "date": "Friday, January 19, 2025 - 2:00 PM"
+      "date": "Friday, October 1st, 2025 - 2:00 PM"
     },
     {
       "event": "Mid-Point Check-in",
-      "date": "Wednesday, January 31, 2025"
+      "date": "Wednesday, October 31, 2025"
     },
     {
       "event": "Submission Deadline",
-      "date": "Friday, February 9, 2025 - 11:59 PM"
+      "date": "Friday, November 30, 2025 - 11:59 PM"
+    },
+    {
+      "event": "Voting Phase",
+      "date": "Monday, December 20, 2025 - 11:59 PM"
     },
     {
       "event": "Demo Day & Awards",
-      "date": "Monday, February 12, 2025 - 1:00 PM"
+      "date": "Monday, January 10, 2025 - 1:00 PM"
     }
   ],
   "projectScope": [
     "Projects must address real business challenges or opportunities within our organization",
     "Solutions should be feasible for implementation within 6-12 months",
     "Projects can range from process improvements to new product features or entirely new business ideas",
-    "Integration with existing company systems and technologies is preferred but not mandatory",
     "Open-source libraries and external APIs are permitted with proper licensing considerations"
   ],
   "submissionRequirements": [

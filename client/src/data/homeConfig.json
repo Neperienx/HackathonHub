@@ -29,23 +29,28 @@
     "steps": [
       {
         "number": "01",
-        "title": "Idea Generation",
-        "description": "Brainstorm innovative solutions to real company challenges and opportunities"
+        "title": "Register",
+        "description": "Create an account and join the Company Spark community"
       },
       {
-        "number": "02", 
-        "title": "Team Formation",
-        "description": "Form cross-functional teams or join existing ones to bring diverse skills together"
+        "number": "02",
+        "title": "Join the adventure",
+        "description": "Create a project. Either work alone or join a team to work on your idea"
       },
       {
         "number": "03",
-        "title": "Development Sprint",
-        "description": "Build your MVP during the 3-week development period with mentorship support"
+        "title": "Build a Solution",
+        "description": "During the hackathon, work on your project and develop a prototype"
       },
       {
         "number": "04",
         "title": "Showcase & Evaluation",
-        "description": "Present your solution to leadership and get feedback from industry experts"
+        "description": "Present your solution to the community, and get feedback in the voting phase"
+      },
+      {
+        "number": "05",
+        "title": "Get recognition",
+        "description": "The best projects will be awarded and recognized"
       }
     ]
   }
