@@ -33,29 +33,25 @@ const Rules = () => {
               <Flame className="h-10 w-10 text-white" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Theme: "{rulesConfig.theme.name}"
+              "{rulesConfig.theme.name}"
             </h2>
           </div>
 
           <div className="card-modern p-8 max-w-4xl mx-auto">
             <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-orange-600 mb-2 flex items-center justify-center">
+              <p className="text-2xl font-bold text-orange-600 mb-2 flex items-center justify-center">
                 <Zap className="h-6 w-6 mr-2" />
-                Tagline:
-              </h3>
-              <p className="text-xl font-semibold text-gray-800 italic">
                 "{rulesConfig.theme.tagline}"
               </p>
             </div>
             
             <div className="border-t border-gray-200 pt-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                <Lightbulb className="h-6 w-6 mr-2" />
-                Theme Description:
-              </h3>
-              <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
-                {rulesConfig.theme.description}
-              </p>
+              <div className="flex items-start">
+                <Lightbulb className="h-6 w-6 mr-3 text-gray-900 mt-1 flex-shrink-0" />
+                <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
+                  {rulesConfig.theme.description}
+                </p>
+              </div>
             </div>
           </div>
         </div>
