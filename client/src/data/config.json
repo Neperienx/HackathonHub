@@ -1,79 +1,30 @@
 {
   "landing": {
     "title": "Company Spark",
-    "description": "An internal platform designed to ignite innovation from within. Through recurring hackathon-style events, employees across departments can form teams, develop ideas, and create solutions that push the company forward.",
-    "subtitle": "Unlocking creativity, encouraging collaboration, and making the most of our collective talent—across engineering, business, software, and operations.",
+    "description": "Company Spark – Inventing What’s Next \n Spark the future. Shape it together.",
     "timeline": [
-      { "label": "Registration Opens", "date": "March 1, 2024" },
-      { "label": "Team Formation Deadline", "date": "March 8, 2024" },
-      { "label": "Hackathon Start", "date": "March 15, 2024" },
-      { "label": "Submission Deadline", "date": "March 17, 2024" },
-      { "label": "Judging + Results", "date": "March 22, 2024" }
-    ],
-    "benefits": [
-      {
-        "title": "Empower Your Ideas",
-        "description": "Bring that side-project or breakthrough concept to life"
-      },
-      {
-        "title": "Collaborate Across the Organization", 
-        "description": "Work with colleagues outside your usual bubble"
-      },
-      {
-        "title": "Grow Skills",
-        "description": "Learn, build, and innovate in a low-stakes, high-impact environment"
-      },
-      {
-        "title": "Get Recognized",
-        "description": "Winning teams get visibility and support for further development"
-      }
-    ],
-    "howItWorks": [
-      "Register for the next hackathon",
-      "Form a Team or join one based on interests and skills",
-      "Build a Solution during the hackathon cycle",
-      "Submit your project for review and feedback",
-      "Showcase on the public Company Spark dashboard"
+      { "label": "Launch", "date": "2025-06-10" },
+      { "label": "Kickoff", "date": "2025-06-15" },
+      { "label": "Mid-Check-in", "date": "2025-06-25" },
+      { "label": "Submission", "date": "2025-07-01" },
+      { "label": "Awards", "date": "2025-07-05" }
     ]
   },
   "rules": {
-    "participation": {
-      "eligibility": "Open to all full-time employees",
-      "teamSize": "Teams of 2 to 5 members",
-      "collaboration": "Cross-department collaboration encouraged",
-      "individuals": "Individual contributors may apply to join open teams"
-    },
-    "timeline": [
-      { "event": "Registration Opens", "date": "[Date]" },
-      { "event": "Team Formation Deadline", "date": "[Date]" },
-      { "event": "Hackathon Start", "date": "[Date & Time]" },
-      { "event": "Submission Deadline", "date": "[Date & Time]" },
-      { "event": "Judging + Results", "date": "[Date]" }
-    ],
-    "projectScope": [
-      "Should align with company values: innovation, sustainability, technology, or employee wellbeing",
-      "Can be hardware, software, service-oriented, or process improvement",
-      "Must be original—no pre-existing or commercialized projects"
-    ],
-    "submissionRequirements": [
-      "Project title and short summary",
-      "Description of problem and solution", 
-      "Screenshots or demo video (if applicable)",
-      "GitHub/Figma links (optional)",
-      "Team member names and roles"
-    ],
-    "evaluationCriteria": [
-      { "criterion": "Innovation", "description": "How novel or original is the idea?" },
-      { "criterion": "Impact", "description": "Can it scale or improve a process internally?" },
-      { "criterion": "Feasibility", "description": "Can it be realistically implemented?" },
-      { "criterion": "Teamwork", "description": "How well did the team collaborate?" },
-      { "criterion": "Presentation", "description": "Is the final submission clear and compelling?" }
-    ],
-    "codeOfConduct": [
-      "Be respectful and inclusive",
-      "Intellectual property remains with creators unless otherwise agreed",
-      "Use company time/resources responsibly", 
-      "Collaboration over competition—Company Spark is about growing ideas, not just winning"
+    "teamSize": "2-5 members",
+    "deliverables": ["Pitch deck", "MVP demo", "Market fit analysis"],
+    "evaluationCriteria": ["Innovation", "Feasibility", "Impact"]
+  },
+  "resources": {
+    "technologies": [
+      {
+        "name": "Radar Sensor A",
+        "description": "Short-range radar for automation and detection applications"
+      },
+      {
+        "name": "Ultrasonic Module B",
+        "description": "Used in parking sensors, adaptable for robotics and proximity detection"
+      }
     ]
   }
 }

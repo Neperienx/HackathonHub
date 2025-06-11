@@ -1,0 +1,51 @@
+{
+  "title": "Company Spark",
+  "subtitle": "Where breakthrough ideas come to life through collaboration and innovation",
+  "description": "Company Spark is an internal platform designed to ignite innovation from within. We believe the best ideas come from our own talented team members who understand our challenges, opportunities, and vision.",
+  "whyParticipate": {
+    "title": "Why Participate?",
+    "benefits": [
+      {
+        "title": "🚀 Innovation Catalyst",
+        "description": "Transform your creative ideas into impactful solutions that drive company growth"
+      },
+      {
+        "title": "🤝 Cross-Department Collaboration",
+        "description": "Build meaningful connections and work with diverse teams across the organization"
+      },
+      {
+        "title": "🎯 Career Development",
+        "description": "Gain hands-on experience with new technologies and showcase your problem-solving skills"
+      },
+      {
+        "title": "🏆 Recognition & Rewards",
+        "description": "Get recognized for your contributions with prizes, career opportunities, and leadership visibility"
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Idea Generation",
+        "description": "Brainstorm innovative solutions to real company challenges and opportunities"
+      },
+      {
+        "number": "02", 
+        "title": "Team Formation",
+        "description": "Form cross-functional teams or join existing ones to bring diverse skills together"
+      },
+      {
+        "number": "03",
+        "title": "Development Sprint",
+        "description": "Build your MVP during the 3-week development period with mentorship support"
+      },
+      {
+        "number": "04",
+        "title": "Showcase & Evaluation",
+        "description": "Present your solution to leadership and get feedback from industry experts"
+      }
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "title": "Rules & Guidelines",
+  "description": "Everything you need to know to participate in Company Spark hackathons successfully.",
+  "participation": {
+    "eligibility": "All company employees, contractors, and interns are welcome to participate",
+    "teamSize": "Teams of 2-5 members (individual participation also allowed)",
+    "collaboration": "Cross-department collaboration is highly encouraged",
+    "individuals": "Solo participants will be matched with teams or can work independently"
+  },
+  "timeline": [
+    {
+      "event": "Registration Opens",
+      "date": "Monday, January 15, 2025"
+    },
+    {
+      "event": "Kickoff Event",
+      "date": "Friday, January 19, 2025 - 2:00 PM"
+    },
+    {
+      "event": "Mid-Point Check-in",
+      "date": "Wednesday, January 31, 2025"
+    },
+    {
+      "event": "Submission Deadline",
+      "date": "Friday, February 9, 2025 - 11:59 PM"
+    },
+    {
+      "event": "Demo Day & Awards",
+      "date": "Monday, February 12, 2025 - 1:00 PM"
+    }
+  ],
+  "projectScope": [
+    "Projects must address real business challenges or opportunities within our organization",
+    "Solutions should be feasible for implementation within 6-12 months",
+    "Projects can range from process improvements to new product features or entirely new business ideas",
+    "Integration with existing company systems and technologies is preferred but not mandatory",
+    "Open-source libraries and external APIs are permitted with proper licensing considerations"
+  ],
+  "submissionRequirements": [
+    "10-minute pitch presentation (slides required)",
+    "Working prototype or detailed mockup/wireframes",
+    "Technical architecture documentation",
+    "Business case including ROI projections",
+    "Implementation timeline and resource requirements",
+    "Risk assessment and mitigation strategies"
+  ],
+  "evaluationCriteria": [
+    {
+      "criterion": "Innovation & Creativity",
+      "description": "Originality of the idea, creative problem-solving approach, and uniqueness of the solution"
+    },
+    {
+      "criterion": "Technical Feasibility",
+      "description": "Technical soundness, scalability, and realistic implementation approach"
+    },
+    {
+      "criterion": "Business Impact",
+      "description": "Potential for positive business outcomes, ROI, and strategic alignment with company goals"
+    },
+    {
+      "criterion": "User Experience",
+      "description": "Usability, accessibility, and overall experience design for end users"
+    },
+    {
+      "criterion": "Presentation Quality",
+      "description": "Clarity of communication, demonstration effectiveness, and team collaboration"
+    }
+  ],
+  "codeOfConduct": [
+    "Respect all participants regardless of background, experience level, or department",
+    "Collaborate openly and share knowledge to help everyone succeed",
+    "Maintain confidentiality of proprietary company information and trade secrets",
+    "Focus on constructive feedback and positive team dynamics",
+    "Report any inappropriate behavior or violations immediately to event organizers",
+    "All intellectual property developed during the hackathon belongs to the company"
+  ]
+}
