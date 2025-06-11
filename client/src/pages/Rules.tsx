@@ -1,4 +1,4 @@
-import { Check, Clock, Users, Target, Award, Shield, BookOpen, Calendar, Lightbulb, Code, Presentation, Rocket, Flag, Upload, Trophy } from "lucide-react";
+import { Check, Clock, Users, Target, Award, Shield, BookOpen, Calendar, Lightbulb, Code, Presentation, Rocket, Flag, Upload, Trophy, Flame, Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import rulesConfig from "@/data/rulesConfig.json";
@@ -30,7 +30,7 @@ const Rules = () => {
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mb-6">
-              <span className="text-3xl">🔥</span>
+              <Flame className="h-10 w-10 text-white" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Theme: "{rulesConfig.theme.title}"
@@ -42,7 +42,10 @@ const Rules = () => {
 
           <div className="card-modern p-8 max-w-4xl mx-auto">
             <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-orange-600 mb-2">🧠 Tagline:</h3>
+              <h3 className="text-2xl font-bold text-orange-600 mb-2 flex items-center justify-center">
+                <Zap className="h-6 w-6 mr-2" />
+                Tagline:
+              </h3>
               <p className="text-xl font-semibold text-gray-800 italic">
                 "{rulesConfig.theme.tagline}"
               </p>
@@ -50,10 +53,10 @@ const Rules = () => {
             
             <div className="border-t border-gray-200 pt-6">
               <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                <span className="mr-2">🧠</span>
+                <Lightbulb className="h-6 w-6 mr-2" />
                 Theme Description:
               </h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
                 {rulesConfig.theme.description}
               </p>
             </div>
