@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Globe, Calendar, User, Eye, Heart, HeartOff } from "lucide-react";
+import { Globe, Calendar, User, Eye, Heart, HeartOff, X, Target, Wrench, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { db } from "@/lib/firebase";
 import { collection, query, where, onSnapshot, addDoc, deleteDoc, doc, getDocs, updateDoc, increment } from "firebase/firestore";
@@ -16,6 +17,7 @@ const PublicProjects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [userUpvotes, setUserUpvotes] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   useEffect(() => {
     // Load public projects
@@ -182,7 +184,8 @@ const PublicProjects = () => {
             {projects.map((project) => (
               <Card
                 key={project.id}
-                className="card-modern group hover:scale-105 transition-all duration-300"
+                className="card-modern group hover:scale-105 transition-all duration-300 cursor-pointer"
+                onClick={() => setSelectedProject(project)}
               >
                 {project.image && (
                   <div className="relative overflow-hidden rounded-t-lg">
@@ -292,6 +295,125 @@ const PublicProjects = () => {
           </div>
         </div>
       </div>
+
+      {/* Project Detail Modal */}
+      {selectedProject && (
+        <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold text-gray-900 mb-4">
+                {selectedProject.title || "Untitled Project"}
+              </DialogTitle>
+            </DialogHeader>
+            
+            <div className="space-y-6">
+              {/* Project Image */}
+              {selectedProject.image && (
+                <div className="relative overflow-hidden rounded-lg">
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
+              )}
+
+              {/* Project Details Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Project Pitch */}
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-2">
+                    <Target className="h-5 w-5 text-purple-600" />
+                    <h3 className="text-lg font-semibold text-gray-900">Project Pitch</h3>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    {selectedProject.pitch || "No description available"}
+                  </p>
+                </div>
+
+                {/* MVP Info */}
+                {selectedProject.mvpInfo && (
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <Wrench className="h-5 w-5 text-blue-600" />
+                      <h3 className="text-lg font-semibold text-gray-900">MVP Progress</h3>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed">
+                      {selectedProject.mvpInfo}
+                    </p>
+                  </div>
+                )}
+
+                {/* Market Impact */}
+                {selectedProject.market && (
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <TrendingUp className="h-5 w-5 text-green-600" />
+                      <h3 className="text-lg font-semibold text-gray-900">Market Impact</h3>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed">
+                      {selectedProject.market}
+                    </p>
+                  </div>
+                )}
+
+                {/* Resources Needed */}
+                {selectedProject.resourcesNecessary && (
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <User className="h-5 w-5 text-orange-600" />
+                      <h3 className="text-lg font-semibold text-gray-900">Resources Needed</h3>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed">
+                      {selectedProject.resourcesNecessary}
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Project Stats */}
+              <div className="flex items-center justify-between pt-6 border-t">
+                <div className="flex items-center space-x-4">
+                  <Badge className="bg-green-100 text-green-800">
+                    <Globe className="w-3 h-3 mr-1" />
+                    Public
+                  </Badge>
+                  <div className="flex items-center space-x-2 text-sm text-gray-500">
+                    <Calendar className="h-4 w-4" />
+                    <span>Created {new Date(selectedProject.createdAt).toLocaleDateString()}</span>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-1 text-sm text-gray-600">
+                    <Heart className="h-4 w-4 text-red-500" />
+                    <span>{selectedProject.upvotes} upvotes</span>
+                  </div>
+                  
+                  {user && (
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleUpvote(selectedProject.id);
+                      }}
+                      variant={userUpvotes.has(selectedProject.id) ? "default" : "outline"}
+                      size="sm"
+                      className="flex items-center space-x-1"
+                    >
+                      {userUpvotes.has(selectedProject.id) ? (
+                        <Heart className="h-4 w-4 text-white fill-current" />
+                      ) : (
+                        <HeartOff className="h-4 w-4" />
+                      )}
+                      <span>{userUpvotes.has(selectedProject.id) ? 'Upvoted' : 'Upvote'}</span>
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };

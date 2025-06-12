@@ -64,8 +64,8 @@ const Landing = () => {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-white text-white hover:bg-white hover:text-purple-700 font-semibold px-8 py-4 text-lg"
-                    onClick={() => setLocation("/public-projects")}
+                    className="border-white text-white hover:bg-white hover:text-purple-700 font-semibold px-8 py-4 text-lg bg-transparent"
+                    onClick={() => setLocation("/showcase")}
                   >
                     Explore Projects
                   </Button>
