@@ -1,4 +1,4 @@
-import { Route } from "wouter";
+import { Route, Switch } from "wouter";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -16,13 +16,15 @@ function App() {
     <TooltipProvider>
       <AuthProvider>
         <Layout>
-          <Route path="/" component={Landing} />
-          <Route path="/rules" component={Rules} />
-          <Route path="/showcase" component={PublicProjects} />
-          <Route path="/projects" component={Projects} />
-          <Route path="/project/:id" component={ProjectEditor} />
-          <Route path="/auth" component={Auth} />
-          <Route component={NotFound} />
+          <Switch>
+            <Route path="/" component={Landing} />
+            <Route path="/rules" component={Rules} />
+            <Route path="/showcase" component={PublicProjects} />
+            <Route path="/projects" component={Projects} />
+            <Route path="/project/:id" component={ProjectEditor} />
+            <Route path="/auth" component={Auth} />
+            <Route component={NotFound} />
+          </Switch>
           <Toaster />
         </Layout>
       </AuthProvider>
