@@ -326,9 +326,9 @@ const PublicProjects = () => {
                     <Target className="h-5 w-5 text-purple-600" />
                     <h3 className="text-lg font-semibold text-gray-900">Project Pitch</h3>
                   </div>
-                  <p className="text-gray-700 leading-relaxed">
+                  <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
                     {selectedProject.pitch || "No description available"}
-                  </p>
+                  </div>
                 </div>
 
                 {/* MVP Info */}
@@ -338,9 +338,9 @@ const PublicProjects = () => {
                       <Wrench className="h-5 w-5 text-blue-600" />
                       <h3 className="text-lg font-semibold text-gray-900">MVP Progress</h3>
                     </div>
-                    <p className="text-gray-700 leading-relaxed">
+                    <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
                       {selectedProject.mvpInfo}
-                    </p>
+                    </div>
                   </div>
                 )}
 
@@ -351,9 +351,9 @@ const PublicProjects = () => {
                       <TrendingUp className="h-5 w-5 text-green-600" />
                       <h3 className="text-lg font-semibold text-gray-900">Market Impact</h3>
                     </div>
-                    <p className="text-gray-700 leading-relaxed">
+                    <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
                       {selectedProject.market}
-                    </p>
+                    </div>
                   </div>
                 )}
 
@@ -364,9 +364,9 @@ const PublicProjects = () => {
                       <User className="h-5 w-5 text-orange-600" />
                       <h3 className="text-lg font-semibold text-gray-900">Resources Needed</h3>
                     </div>
-                    <p className="text-gray-700 leading-relaxed">
+                    <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
                       {selectedProject.resourcesNecessary}
-                    </p>
+                    </div>
                   </div>
                 )}
               </div>
