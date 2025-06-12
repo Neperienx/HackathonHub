@@ -9,6 +9,7 @@ import {
   updateProfile
 } from 'firebase/auth';
 import { auth, googleProvider } from '@/lib/firebase';
+import { LocalAuthService } from '@/lib/localAuth';
 
 interface AuthContextType {
   user: User | null;
@@ -38,12 +39,25 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    if (auth) {
+      // Firebase authentication
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setUser(user);
+        setLoading(false);
+      });
+      return unsubscribe;
+    } else {
+      // Local authentication fallback
+      const localUser = LocalAuthService.getCurrentUser();
+      if (localUser) {
+        setUser({
+          uid: localUser.id,
+          email: localUser.email,
+          displayName: localUser.name,
+        } as User);
+      }
       setLoading(false);
-    });
-
-    return unsubscribe;
+    }
   }, []);
 
   const signInWithGoogle = async () => {
