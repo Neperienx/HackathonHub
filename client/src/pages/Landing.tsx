@@ -36,7 +36,12 @@ const Landing = () => {
             
             <div className="relative mb-10">
               <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-cyan-300 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
-                {homeConfig.subtitle}
+                {homeConfig.subtitle.split('\n').map((line, index) => (
+                  <span key={index}>
+                    {line}
+                    {index < homeConfig.subtitle.split('\n').length - 1 && <br />}
+                  </span>
+                ))}
               </p>
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
             </div>

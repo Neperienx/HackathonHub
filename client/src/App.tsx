@@ -22,7 +22,7 @@ function App() {
           <Route path="/projects" component={Projects} />
           <Route path="/project/:id" component={ProjectEditor} />
           <Route path="/auth" component={Auth} />
-          <Route path="/:rest*" component={NotFound} />
+          <Route component={NotFound} />
           <Toaster />
         </Layout>
       </AuthProvider>
