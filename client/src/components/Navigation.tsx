@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Menu, X, Zap, Sparkles, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
-import config from "@/data/config.json";
+import homeConfig from "@/data/homeConfig.json";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -52,7 +52,7 @@ const Navigation = () => {
                 <Sparkles className="absolute -top-1 -right-1 text-blue-500 text-sm opacity-70 floating-animation" />
               </div>
               <span className="text-xl font-bold text-gradient">
-                {config.landing.title}
+                {homeConfig.title}
               </span>
             </div>
             
